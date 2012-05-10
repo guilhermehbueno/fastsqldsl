@@ -4,17 +4,18 @@ import java.lang.reflect.Field;
 import java.sql.SQLException;
 
 import javax.persistence.Column;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fastsql.sql.builder.model.test.MenuTipoEnum;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 /**
  * This enum is responsible for recovery values from different associations types.
  * @author Guilherme
- *
  */
 //TODO: In the future is need create a interface that will represents a generic resultSet from differente Data Bases. Today supports only resultSets from google.
 public enum AssociationType {
@@ -72,7 +73,26 @@ public enum AssociationType {
 			field.setAccessible(false);
 			return value;
 		}
-	};
+	},
+	
+	ENUMERATED{
+		@Override
+		public Object extractFieldValue(Field field, ResultSet resultSet) throws Exception {
+			Object value = null;
+			field.setAccessible(true);
+			Column coluna = field.getAnnotation(Column.class);
+			if(coluna!=null){
+				value = resultSet.getObject(coluna.name());
+				if(field.isEnumConstant()){
+					value = Enum.valueOf<MenuTipoEnum>(field.getType());
+					
+				}
+			}
+			field.setAccessible(false);
+			return value;
+		}
+	}
+	;
 	
 	public abstract Object extractFieldValue(Field field, ResultSet resultSet)  throws SQLException ;
 	
@@ -92,6 +112,11 @@ public enum AssociationType {
 		if(field.isAnnotationPresent(ManyToMany.class)){
 			return MANY_TO_ONE;
 		}
+		
+		if(field.isAnnotationPresent(Enumerated.class)){
+			return ENUMERATED;
+		}
+		
 		return DEFAULT;
 	}
 }
