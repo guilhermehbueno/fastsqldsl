@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="FastSqlDsl" default="dist" basedir="..">
+	<description>
+        Build FastSqlDsl
+    </description>
+	<property name="src" location="src" />
+	<property name="test" location="test" />
+	<property name="build" location="target" />
+	<property name="dist" location="dist" />
+	<property file="${basedir}/build/build.properties" />
+
+	<path id="build.path">
+		<fileset dir="${basedir}/lib" includes="*.jar" />
+	</path>
+
+	<path id="build.path.test">
+		<fileset dir="${basedir}/lib" includes="*.jar" />
+		<path refid="build.path" />
+		<pathelement path="target" />
+		<fileset dir="${basedir}/lib" includes="*.jar" />
+	</path>
+
+	<target name="init" depends="clean">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}/test" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<javac srcdir="${src}" classpathref="build.path" destdir="${build}" encoding="ISO-8859-1" />
+	</target>
+
+	<target name="compile-test" depends="compile" description="compile the source ">
+		<javac srcdir="${test}" classpathref="build.path.test" destdir="${dist}/test" encoding="ISO-8859-1" />
+	</target>
+
+	<target name="dist" depends="test" description="generate the distribution">
+		<mkdir dir="${dist}" />
+		<jar jarfile="${dist}/${jar.name}">
+			<fileset dir="${build}">
+				<include name="**/*.class" />
+				<exclude name="**/test/*.class" />
+			</fileset>
+			<fileset dir="${basedir}/src/">
+				<include name="**/*.properties" />
+				<include name="**/*.xml" />
+				<include name="**/*.vm" />
+			</fileset>
+		</jar>
+		<copy file="${dist}/${jar.name}" todir="${application.location}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${build}/" />
+		<delete dir="${dist}" />
+		<delete dir="${dist}/test" />
+	</target>
+
+	<target name="test" depends="compile-test">
+		<junit printsummary="yes">
+			<formatter type="plain" />
+			<classpath>
+				<pathelement location="${build.path.test}" />
+				<pathelement location="${dist}/test" />
+				<fileset dir="${basedir}/lib" includes="*.jar" />
+				<fileset dir="${basedir}/lib" includes="*.jar" />
+				<path refid="build.path" />
+				<pathelement path="target" />
+				<fileset dir="${basedir}/lib" includes="*.jar" />
+			</classpath>
+			<batchtest fork="no" todir="${reports.tests}">
+				<fileset dir="${dist}/test">
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+</project>

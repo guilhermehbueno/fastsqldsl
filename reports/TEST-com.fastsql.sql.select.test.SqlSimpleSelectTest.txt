@@ -1,0 +1,16 @@
+Testsuite: com.fastsql.sql.select.test.SqlSimpleSelectTest
+Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 0,005 sec
+------------- Standard Output ---------------
+ SELECT atributos FROM nome_tabela WHERE teste='teste' OR value='value'
+ SELECT atributos FROM nome_tabela INNER JOIN tabela ON teste='teste' OR value='value'
+ SELECT atributos FROM nome_tabela LEFT OUTER JOIN tabela ON teste='teste' OR value='value' WHERE teste='teste' OR value='value'
+ SELECT atributos FROM nome_tabela RIGHT OUTER JOIN tabela ON teste='teste' OR value='value'
+ SELECT  *  FROM nome_tabela WHERE teste='teste' OR value='value'
+ SELECT  *  FROM nome_tabela WHERE teste = 'teste' AND teste = 'teste' OR value = 'value'
+------------- ---------------- ---------------
+
+Testcase: testSelectWithWhere took 0 sec
+Testcase: testSelectWithInnerJoin took 0,001 sec
+Testcase: testSelectWithLeftOuterJoin took 0 sec
+Testcase: testSelectWithRightOuterJoin took 0 sec
+Testcase: testSelect took 0 sec
