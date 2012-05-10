@@ -62,7 +62,7 @@ public class AbstractModel{
 		for (AbstractAttribute attribute : this.modelAttributes) {
 			try {
 				attribute.getValue(resultSet);
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				//TODO: TRATAR PILHA DE ERROS E RETORNAR FALSE
 				e.printStackTrace();
 			}

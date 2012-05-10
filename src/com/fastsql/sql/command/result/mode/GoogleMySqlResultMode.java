@@ -14,7 +14,7 @@ import com.fastsql.sql.command.result.step.ExtractOneToOneStep;
 import com.fastsql.sql.util.GoogleMySql;
 import com.google.cloud.sql.jdbc.ResultSet;
 
-public class GoogleMySqlResultMode  implements ResultMode, QueryResult{
+public class GoogleMySqlResultMode  implements ResultMode{
 	
 	private final ProcessorResult processorResult;
 	private GoogleMySql google;

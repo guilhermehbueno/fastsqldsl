@@ -84,8 +84,7 @@ public enum AssociationType {
 			if(coluna!=null){
 				value = resultSet.getObject(coluna.name());
 				if(field.isEnumConstant()){
-					value = Enum.valueOf<MenuTipoEnum>(field.getType());
-					
+					value = Enum.valueOf((Class<Enum>) field.getType(),value.toString());
 				}
 			}
 			field.setAccessible(false);
@@ -94,7 +93,7 @@ public enum AssociationType {
 	}
 	;
 	
-	public abstract Object extractFieldValue(Field field, ResultSet resultSet)  throws SQLException ;
+	public abstract Object extractFieldValue(Field field, ResultSet resultSet)  throws Exception ;
 	
 	public static AssociationType discoverCorrectAssociationOf(Field field){
 		if(field.isAnnotationPresent(Column.class)){

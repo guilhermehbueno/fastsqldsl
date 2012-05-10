@@ -21,7 +21,7 @@ public class AbstractAttribute {
 		this(field, AssociationType.DEFAULT);
 	}
 
-	public Object getValue(ResultSet resultSet) throws SQLException {
+	public Object getValue(ResultSet resultSet) throws Exception {
 		this.value = this.type.extractFieldValue(this.field, resultSet);
 		return value;
 	} 
