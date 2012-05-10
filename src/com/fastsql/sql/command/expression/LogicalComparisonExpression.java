@@ -4,6 +4,7 @@ import com.fastsql.sql.api.Build;
 import com.fastsql.sql.builder.LogicalEnum;
 import com.fastsql.sql.command.result.Result;
 import com.fastsql.sql.command.result.mode.ResultMode;
+import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 
 import static com.fastsql.sql.command.expression.Expression.*;
 
@@ -18,6 +19,11 @@ public class LogicalComparisonExpression implements Build {
 	
 	public static LogicalComparisonExpression attribute(String atributo){
 		return new LogicalComparisonExpression(atributo);
+	}
+	
+	public static LogicalComparisonExpression id(Class modelo){
+		String id = SqlReflectionUtil.getIdFieldName(modelo);
+		return new LogicalComparisonExpression(id);
 	}
 	
 	public LogicalComparisonExpression isNull(){

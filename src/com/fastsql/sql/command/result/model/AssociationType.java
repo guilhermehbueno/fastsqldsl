@@ -2,15 +2,18 @@ package com.fastsql.sql.command.result.model;
 
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fastsql.sql.builder.model.test.MenuTipoEnum;
+import com.fastsql.sql.builder.SqlTool;
+import static com.fastsql.sql.command.expression.LogicalComparisonExpression.*;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 /**
@@ -23,6 +26,7 @@ public enum AssociationType {
 	DEFAULT {
 		@Override
 		public Object extractFieldValue(Field field, ResultSet resultSet) throws SQLException {
+			System.out.println("DEFAULT: ");
 			Object value = null;
 			field.setAccessible(true);
 			Column col = field.getAnnotation(Column.class);
@@ -37,19 +41,60 @@ public enum AssociationType {
 	ONE_TO_ONE {
 		@Override
 		public Object extractFieldValue(Field field, ResultSet resultSet) throws SQLException {
+			System.out.println("ONE_TO_ONE: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
 			if(join!=null){
 				value = resultSet.getObject(join.referencedColumnName());
+				if(value==null){
+					return null;
+				}
+				
+				
+				String sql = SqlTool.getInstance()
+										.select(field.getType())
+										.where(id(field.getType()).equals(value.toString()))
+										.build();
+				
+				System.out.println("SQL: "+sql);
 			}
 			field.setAccessible(false);
 			return value;
 		}
 	},
+	
+	ONE_TO_MANY{
+		@Override
+		public Object extractFieldValue(Field field, ResultSet resultSet) throws SQLException {
+			System.out.println("ONE_TO_MANY: ");
+			Object value = null;
+			field.setAccessible(true);
+			JoinColumn join = field.getAnnotation(JoinColumn.class);
+			if(join!=null){
+				value = resultSet.getObject(join.referencedColumnName());
+				if(value==null){
+					return null;
+				}
+				
+				System.out.println("Construindo SQL: ");
+				String sql = SqlTool.getInstance()
+										.select(field.getType())
+										.where(id(field.getType()).equals(value.toString()))
+										.build();
+				
+				System.out.println("SQL: "+sql);
+			}
+			field.setAccessible(false);
+			return value;
+		}
+	},
+	
+	
 	MANY_TO_ONE {
 		@Override
 		public Object extractFieldValue(Field field, ResultSet resultSet) throws SQLException {
+			System.out.println("MANY_TO_ONE: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -64,6 +109,7 @@ public enum AssociationType {
 	MANY_TO_MANY {
 		@Override
 		public Object extractFieldValue(Field field, ResultSet resultSet) throws SQLException {
+			System.out.println("MANY_TO_MANY: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -78,14 +124,20 @@ public enum AssociationType {
 	ENUMERATED{
 		@Override
 		public Object extractFieldValue(Field field, ResultSet resultSet) throws Exception {
+			System.out.println("ENUMERATED: ");
 			Object value = null;
 			field.setAccessible(true);
 			Column coluna = field.getAnnotation(Column.class);
 			if(coluna!=null){
 				value = resultSet.getObject(coluna.name());
-				if(field.isEnumConstant()){
-					value = Enum.valueOf((Class<Enum>) field.getType(),value.toString());
+				if(value==null){
+					return null;
 				}
+				
+				System.out.println("[ENUMERATED]" +value);
+				System.out.println("[field.isEnumConstant()]" +field.isEnumConstant());
+				value = Enum.valueOf((Class<Enum>) field.getType(),value.toString());
+				System.out.println("[field.isEnumConstant()]" +value);
 			}
 			field.setAccessible(false);
 			return value;
@@ -96,12 +148,16 @@ public enum AssociationType {
 	public abstract Object extractFieldValue(Field field, ResultSet resultSet)  throws Exception ;
 	
 	public static AssociationType discoverCorrectAssociationOf(Field field){
-		if(field.isAnnotationPresent(Column.class)){
+		if(field.isAnnotationPresent(Column.class)&&!field.isAnnotationPresent(Enumerated.class)){
 			return DEFAULT;
 		}
 		
 		if(field.isAnnotationPresent(OneToOne.class)){
 			return ONE_TO_ONE;
+		}
+		
+		if(field.isAnnotationPresent(OneToMany.class)){
+			return ONE_TO_MANY;
 		}
 		
 		if(field.isAnnotationPresent(ManyToOne.class)){
@@ -118,4 +174,5 @@ public enum AssociationType {
 		
 		return DEFAULT;
 	}
+	
 }

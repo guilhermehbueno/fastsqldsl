@@ -1,4 +1,4 @@
-Testsuite: com.fastsql.sql.builder.model.test.MenuTipoEnum
+Testsuite: com.fastsql.sql.util.test.AssociationTypeTest$Alunas
 Tests run: 2, Failures: 0, Errors: 2, Time elapsed: 0,002 sec
 
 Testcase: initializationError took 0 sec

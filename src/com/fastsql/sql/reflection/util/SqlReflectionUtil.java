@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -92,5 +93,24 @@ public class SqlReflectionUtil {
 			field.setAccessible(false);
 		}
 		return atributos;
+	}
+	
+	public static String getIdFieldName(Class modelo){
+		Field campo = extractFieldWithAnnotation(modelo, Id.class);
+		Column column = campo.getAnnotation(Column.class);
+		return column.name();
+	}
+	
+	public static Field extractFieldWithAnnotation(Class modelo, Class annotation){
+		Field campo = null;
+		Field [] campos = modelo.getDeclaredFields();
+		for (Field field : campos) {
+			field.setAccessible(true);
+			if(field.isAnnotationPresent(annotation)){
+				campo = field;
+			}
+			field.setAccessible(false);
+		}
+		return campo;
 	}
 }
