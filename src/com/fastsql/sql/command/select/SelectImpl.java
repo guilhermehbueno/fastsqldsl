@@ -68,7 +68,7 @@ public class SelectImpl implements Select, From, Join, Where{
 	}
 
 	@Override
-	public From on(SimpleComparisonExpression expression) {
+	public From on(Build expression) {
 		this.builder.append(" ON "+expression.build());
 		return this;
 	}

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static com.fastsql.sql.builder.SqlTerms.*;
 import org.junit.Test;
 import com.fastsql.sql.builder.SqlTool;
+import static com.fastsql.sql.command.expression.LogicalComparisonExpression.attribute;
 
 public class SqlSimpleSelectTest {
 
@@ -33,9 +34,18 @@ public class SqlSimpleSelectTest {
 	
 	@Test
 	public void testSelectWithLeftOuterJoin() {
-		String sql = SqlTool.getInstance().select("atributos").from("nome_tabela").leftOuterJoin("tabela").on(expression("teste='teste'").and("teste='teste'").or("value='value'")).where(expression("teste='teste'").and("teste='teste'").or("value='value'")).build();
+		String sql = SqlTool
+						.getInstance()
+						.select("atributos")
+						.from("nome_tabela")
+						.leftOuterJoin("tabela").on(expression("teste='teste'")	.and("teste='teste'").or("value='value'"))
+						.where(expression("teste='teste'").and("teste='teste'").or("value='value'")).build();
 		assertNotNull(sql);
 		System.out.println(sql);
+		
+		
+		String sqlLogical = SqlTool.getInstance().select("atributos").from("nome_tabela").leftOuterJoin("outra_tabela").on(attribute("nome").equals("teste")).where(attribute("tal").differentFrom("este")).build();
+		System.out.println("sqlLogical: "+ sqlLogical);
 	}
 	
 	@Test
