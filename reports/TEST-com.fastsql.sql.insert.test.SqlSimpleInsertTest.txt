@@ -1,7 +1,7 @@
 Testsuite: com.fastsql.sql.insert.test.SqlSimpleInsertTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,018 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,01 sec
 ------------- Standard Output ---------------
  INSERT INTO Usuario SET id  = 'teste' AND  nome  = 'guilherme' AND  idade  = 0 AND  sobrenome  = 'bueno'
 ------------- ---------------- ---------------
 
-Testcase: testSimpleInsert took 0,016 sec
+Testcase: testSimpleInsert took 0,01 sec

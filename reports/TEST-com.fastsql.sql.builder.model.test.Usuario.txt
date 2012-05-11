@@ -1,5 +1,5 @@
 Testsuite: com.fastsql.sql.builder.model.test.Usuario
-Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 0,002 sec
+Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 0 sec
 
 Testcase: initializationError took 0 sec
 	Caused an ERROR

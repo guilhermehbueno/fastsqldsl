@@ -1,5 +1,5 @@
 Testsuite: com.fastsql.sql.builder.model.test.MenuStatusEnum
-Tests run: 2, Failures: 0, Errors: 2, Time elapsed: 0,003 sec
+Tests run: 2, Failures: 0, Errors: 2, Time elapsed: 0,01 sec
 
 Testcase: initializationError took 0 sec
 	Caused an ERROR

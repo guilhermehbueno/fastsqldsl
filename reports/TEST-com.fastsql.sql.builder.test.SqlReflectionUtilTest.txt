@@ -1,5 +1,5 @@
 Testsuite: com.fastsql.sql.builder.test.SqlReflectionUtilTest
-Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 0,021 sec
+Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 0,01 sec
 ------------- Standard Output ---------------
 [4] - testExtractListAttributesFrom = [id, nome, idade, sobrenome]
 [2] - testExtractAttributesWithValuesFrom = id  = 'teste', nome  = 'guilherme', idade  = 0, sobrenome  = 'bueno'
@@ -7,7 +7,7 @@ Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 0,021 sec
 [3] - testExtractEntityName = Usuario
 ------------- ---------------- ---------------
 
-Testcase: testExtractListAttributesFrom took 0,004 sec
-Testcase: testExtractAttributesWithValuesFrom took 0,012 sec
-Testcase: testExtractAttributesFrom took 0,001 sec
+Testcase: testExtractListAttributesFrom took 0 sec
+Testcase: testExtractAttributesWithValuesFrom took 0,01 sec
+Testcase: testExtractAttributesFrom took 0 sec
 Testcase: testExtractEntityName took 0 sec
