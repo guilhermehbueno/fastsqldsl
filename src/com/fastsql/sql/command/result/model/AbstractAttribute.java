@@ -9,20 +9,22 @@ public class AbstractAttribute {
 	
 	private final Field field;
 	private final AssociationType type;
+	private final AbstractModel model;
 	private Object value;
 	
-	public AbstractAttribute(Field field, AssociationType associationType) {
+	public AbstractAttribute(Field field, AssociationType associationType, AbstractModel abstractModel) {
 		super();
 		this.field = field;
 		this.type = associationType;
+		this.model = abstractModel;
 	}
 	
-	public AbstractAttribute(Field field) {
-		this(field, AssociationType.DEFAULT);
+	public AbstractAttribute(Field field, AbstractModel abstractModel) {
+		this(field, AssociationType.DEFAULT, abstractModel);
 	}
 
 	public Object getValue(ResultSet resultSet) throws Exception {
-		this.value = this.type.extractFieldValue(this.field, resultSet);
+		this.value = this.type.extractFieldValue(this.model.getModel(), this.field, resultSet);
 		return value;
 	} 
 	

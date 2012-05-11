@@ -20,7 +20,7 @@ public class AbstractModel{
 	
 	private static void init(AbstractModel model){
 		List<AbstractAttribute> attributes;
-		attributes = AbstractAttributeBuilder.extractAttributesFrom(model.getModel());
+		attributes = AbstractAttributeBuilder.extractAttributesFrom(model.getModel(), model);
 		for (AbstractAttribute abstractAttribute : attributes) {
 			model.addAttribute(abstractAttribute);
 		}

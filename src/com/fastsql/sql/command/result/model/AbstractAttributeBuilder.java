@@ -6,12 +6,12 @@ import java.util.List;
 
 public class AbstractAttributeBuilder {
 	
-	public static List<AbstractAttribute> extractAttributesFrom(Object modelo){
+	public static List<AbstractAttribute> extractAttributesFrom(Object modelo, AbstractModel abstractModel){
 		List<AbstractAttribute> attributes = new ArrayList<AbstractAttribute>();
 		Field [] fields = modelo.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			field.setAccessible(true);
-			AbstractAttribute attribute = extractAttributeFrom(field);
+			AbstractAttribute attribute = extractAttributeFrom(field, abstractModel);
 			attributes.add(attribute);
 			field.setAccessible(false);
 		}
@@ -19,9 +19,9 @@ public class AbstractAttributeBuilder {
 	}
 	
 	
-	public static AbstractAttribute extractAttributeFrom(Field field){
+	public static AbstractAttribute extractAttributeFrom(Field field, AbstractModel abstractModel){
 		AssociationType associationType = AssociationType.discoverCorrectAssociationOf(field);
-		AbstractAttribute attribute = new AbstractAttribute(field, associationType);
+		AbstractAttribute attribute = new AbstractAttribute(field, associationType, abstractModel);
 		return attribute;
 	}
 	

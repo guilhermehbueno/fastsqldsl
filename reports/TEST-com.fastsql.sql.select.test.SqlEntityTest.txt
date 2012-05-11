@@ -1,5 +1,5 @@
 Testsuite: com.fastsql.sql.select.test.SqlEntityTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,002 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,003 sec
 ------------- Standard Output ---------------
  SELECT id, nome, idade, sobrenome FROM Usuario
 ------------- ---------------- ---------------

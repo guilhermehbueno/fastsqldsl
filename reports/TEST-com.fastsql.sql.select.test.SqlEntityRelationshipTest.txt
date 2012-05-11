@@ -1,9 +1,9 @@
 Testsuite: com.fastsql.sql.select.test.SqlEntityRelationshipTest
-Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 0,135 sec
+Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 0,162 sec
 ------------- Standard Output ---------------
 Sql:  SELECT label, link, status, tipo FROM menu
-Mode: com.fastsql.sql.command.result.mode.GoogleMySqlResultMode@82015f2
-Retorno: com.fastsql.sql.builder.model.test.Menu@7280c708
+Mode: com.fastsql.sql.command.result.mode.GoogleMySqlResultMode@1f9db378
+Retorno: com.fastsql.sql.builder.model.test.Menu@2a719b7f
 ------------- ---------------- ---------------
 ------------- Standard Error -----------------
 com.google.apphosting.api.ApiProxy$CallNotFoundException: The API package 'rdbms' or call 'OpenConnection()' was not found.
@@ -60,7 +60,7 @@ com.google.apphosting.api.ApiProxy$CallNotFoundException: The API package 'rdbms
 	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:138)
 ------------- ---------------- ---------------
 
-Testcase: testOneToManyJPAAnnotation took 0,134 sec
+Testcase: testOneToManyJPAAnnotation took 0,16 sec
 	Caused an ERROR
 null
 java.lang.NullPointerException
