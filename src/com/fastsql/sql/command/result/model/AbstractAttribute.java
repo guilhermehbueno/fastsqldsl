@@ -3,9 +3,13 @@ package com.fastsql.sql.command.result.model;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.google.cloud.sql.jdbc.ResultSet;
 
 public class AbstractAttribute {
+	
+	private static Logger log = Logger.getLogger(AbstractAttribute.class);
 	
 	private final Field field;
 	private final AssociationType type;
@@ -29,7 +33,7 @@ public class AbstractAttribute {
 	} 
 	
 	public void setToObject(Object modelo) throws Exception{
-		System.out.println(this.getClass().getSimpleName()+" Executando setToObject com o field: "+this.field.getName()+": "+this.value);
+		log.info(this.getClass().getSimpleName()+" Executando setToObject com o field: "+this.field.getName()+": "+this.value);
 		boolean hasField = hasField(modelo, this.field);
 		if(hasField){
 			this.field.setAccessible(true);
@@ -43,14 +47,14 @@ public class AbstractAttribute {
 		Field [] fields = modelo.getClass().getDeclaredFields();
 		for (Field fieldFromModel : fields) {
 			fieldFromModel.setAccessible(true);
-			System.out.println(this.getClass().getSimpleName()+" fieldFromModel: "+fieldFromModel.getName());
+			log.info(this.getClass().getSimpleName()+" fieldFromModel: "+fieldFromModel.getName());
 			if(fieldFromModel.getName().equalsIgnoreCase(field.getName())){
-				System.out.println(this.getClass().getSimpleName()+" Executando hasField: "+true);
+				log.info(this.getClass().getSimpleName()+" Executando hasField: "+true);
 				return true;
 			}
 			fieldFromModel.setAccessible(false);
 		}
-		System.out.println(this.getClass().getSimpleName()+" Executando hasField: "+false);
+		log.info(this.getClass().getSimpleName()+" Executando hasField: "+false);
 		return false;
 	}
 	

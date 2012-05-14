@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.fastsql.sql.builder.SqlTool;
-import com.fastsql.sql.builder.model.test.Usuario;
+import com.fastsql.sql.builder.model.Usuario;
 
 public class SqlEntityTest {
 	

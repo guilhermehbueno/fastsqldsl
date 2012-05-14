@@ -29,5 +29,23 @@ public class GoogleMySql {
 		}
 		return resultSet;
 	}
+	
+	public void update(String update) throws Exception{
+		try{
+			 PreparedStatement stmt = conn.prepareStatement(update);
+			 stmt.execute();
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void insert(String update) throws Exception{
+		try{
+			 PreparedStatement stmt = conn.prepareStatement(update);
+			 stmt.execute();
+		}catch (Exception e) {
+			throw e;
+		}
+	}
 
 }

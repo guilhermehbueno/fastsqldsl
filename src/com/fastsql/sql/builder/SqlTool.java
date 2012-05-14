@@ -9,6 +9,7 @@ import com.fastsql.sql.command.insert.InsertImpl;
 import com.fastsql.sql.command.result.mode.GoogleMySqlResultMode;
 import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.command.select.SelectImpl;
+import com.fastsql.sql.command.update.UpdateImpl;
 
 public class SqlTool {
 	
@@ -41,8 +42,8 @@ public class SqlTool {
 		return new SelectImpl(modelo, this.mode);
 	}
 	
-	public static Update update(){
-		return null;
+	public static Update update(Object entidade) throws Exception{
+		return new UpdateImpl(entidade);
 	}
 	
 	public static Delete delete(){

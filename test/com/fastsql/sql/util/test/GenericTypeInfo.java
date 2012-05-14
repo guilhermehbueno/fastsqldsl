@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
-import com.fastsql.sql.builder.model.test.Usuario;
+import com.fastsql.sql.builder.model.Usuario;
  
 public class GenericTypeInfo {
     java.util.List<Usuario> fooList = new ArrayList<Usuario>();

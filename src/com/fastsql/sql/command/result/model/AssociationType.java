@@ -3,6 +3,7 @@ package com.fastsql.sql.command.result.model;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,9 +18,9 @@ import javax.persistence.OneToOne;
 import com.fastsql.sql.builder.SqlTool;
 import com.fastsql.sql.command.expression.Expression;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
+import org.apache.log4j.Logger;
 
 import static com.fastsql.sql.command.expression.LogicalComparisonExpression.*;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 /**
  * This enum is responsible for recovery values from different associations types.
@@ -31,7 +32,7 @@ public enum AssociationType {
 	DEFAULT {
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws SQLException {
-			System.out.println("DEFAULT: ");
+			log.info("DEFAULT: ");
 			Object value = null;
 			field.setAccessible(true);
 			Column col = field.getAnnotation(Column.class);
@@ -46,7 +47,7 @@ public enum AssociationType {
 	ONE_TO_ONE {
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws SQLException {
-			System.out.println("ONE_TO_ONE: ");
+			log.info("ONE_TO_ONE: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -62,7 +63,7 @@ public enum AssociationType {
 										.where(id(field.getType()).equals(value.toString()))
 										.build();
 				
-				System.out.println("SQL: "+sql);
+				log.info("SQL: "+sql);
 			}
 			field.setAccessible(false);
 			return value;
@@ -72,7 +73,7 @@ public enum AssociationType {
 	ONE_TO_MANY{
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws Exception{
-			System.out.println("ONE_TO_MANY: ");
+			log.info("ONE_TO_MANY: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -93,9 +94,9 @@ public enum AssociationType {
 		            }
 		        }
 		        
-		        System.out.println("Construindo: "+tipoParametrizado);
+		        log.info("Construindo: "+tipoParametrizado);
 		        tipoParametrizado=tipoParametrizado.replaceAll("class", "").trim();
-		        System.out.println("Construindo: "+tipoParametrizado);
+		        log.info("Construindo: "+tipoParametrizado);
 		        Object instanciaTipoParametrizado = Class.forName(tipoParametrizado).newInstance();
 				
 				
@@ -103,7 +104,7 @@ public enum AssociationType {
 				List<? extends Object> result =  SqlTool.getInstance()
 																.select(" * ")
 																.from(join.table())
-																.where(attribute(join.referencedColumnName()).equals(Expression.likeInt(value.toString())))
+																.where(attribute(join.referencedColumnName()).equals(value.toString()))
 																.build(instanciaTipoParametrizado).getResult();
 				value = result;
 				
@@ -117,7 +118,7 @@ public enum AssociationType {
 	MANY_TO_ONE {
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws SQLException {
-			System.out.println("MANY_TO_ONE: ");
+			log.info("MANY_TO_ONE: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -132,7 +133,7 @@ public enum AssociationType {
 	MANY_TO_MANY {
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws SQLException {
-			System.out.println("MANY_TO_MANY: ");
+			log.info("MANY_TO_MANY: ");
 			Object value = null;
 			field.setAccessible(true);
 			JoinColumn join = field.getAnnotation(JoinColumn.class);
@@ -147,7 +148,7 @@ public enum AssociationType {
 	ENUMERATED{
 		@Override
 		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws Exception {
-			System.out.println("ENUMERATED: ");
+			log.info("ENUMERATED: ");
 			Object value = null;
 			field.setAccessible(true);
 			Column coluna = field.getAnnotation(Column.class);
@@ -157,10 +158,10 @@ public enum AssociationType {
 					return null;
 				}
 				
-				System.out.println("[ENUMERATED]" +value);
-				System.out.println("[field.isEnumConstant()]" +field.isEnumConstant());
+				log.info("[ENUMERATED]" +value);
+				log.info("[field.isEnumConstant()]" +field.isEnumConstant());
 				value = Enum.valueOf((Class<Enum>) field.getType(),value.toString());
-				System.out.println("[field.isEnumConstant()]" +value);
+				log.info("[field.isEnumConstant()]" +value);
 			}
 			field.setAccessible(false);
 			return value;
@@ -197,5 +198,7 @@ public enum AssociationType {
 		
 		return DEFAULT;
 	}
+	
+	private static Logger log = Logger.getLogger(AssociationType.class);
 	
 }

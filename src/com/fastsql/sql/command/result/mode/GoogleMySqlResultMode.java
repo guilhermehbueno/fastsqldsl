@@ -1,5 +1,7 @@
 package com.fastsql.sql.command.result.mode;
 
+import org.apache.log4j.Logger;
+
 import com.fastsql.sql.command.result.PackageResult;
 import com.fastsql.sql.command.result.ProcessorResult;
 import com.fastsql.sql.command.result.QueryResult;
@@ -11,10 +13,13 @@ import com.fastsql.sql.command.result.step.ExtractManyToManyStep;
 import com.fastsql.sql.command.result.step.ExtractManyToOneStep;
 import com.fastsql.sql.command.result.step.ExtractOneToManyStep;
 import com.fastsql.sql.command.result.step.ExtractOneToOneStep;
+import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import com.fastsql.sql.util.GoogleMySql;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 public class GoogleMySqlResultMode  implements ResultMode{
+	
+	private Logger log = Logger.getLogger(GoogleMySqlResultMode.class);
 	
 	private final ProcessorResult processorResult;
 	private GoogleMySql google;
@@ -36,11 +41,12 @@ public class GoogleMySqlResultMode  implements ResultMode{
 		Result<T> result = null;
 		try {
 			this.google = new GoogleMySql();
-			System.out.println("Instanciando GoogleMySql");
+			log.info("Instanciando GoogleMySql: "+sql);
+			System.out.println("Instanciando GoogleMySql: "+sql);
 			resultSet = this.google.select(sql);
-			System.out.println("Realizando Select com retorno: "+ resultSet);
+			log.info("Realizando Select com retorno: "+ resultSet);
 			PackageResult packageResult = new PackageResult(resultSet, retorno);
-			System.out.println("packageResult :"+packageResult);
+			log.info("packageResult :"+packageResult);
 			result = this.processorResult.process(packageResult);
 		} catch (Exception e) {
 			e.printStackTrace();

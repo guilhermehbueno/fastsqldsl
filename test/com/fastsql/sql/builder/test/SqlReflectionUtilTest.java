@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.fastsql.sql.builder.LogicalEnum;
-import com.fastsql.sql.builder.model.test.Usuario;
+import com.fastsql.sql.builder.model.Usuario;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 
 public class SqlReflectionUtilTest {

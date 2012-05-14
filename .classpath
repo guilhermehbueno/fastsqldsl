@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/google_sql.jar"/>
 	<classpathentry kind="lib" path="lib/appengine-api-1.0-sdk-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/comofuncionati/war/WEB-INF/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

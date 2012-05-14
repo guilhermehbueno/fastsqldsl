@@ -2,6 +2,8 @@ package com.fastsql.sql.command.select;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fastsql.sql.api.Build;
 import com.fastsql.sql.api.From;
 import com.fastsql.sql.api.Join;
@@ -9,6 +11,7 @@ import com.fastsql.sql.api.Select;
 import com.fastsql.sql.api.Where;
 import com.fastsql.sql.command.expression.SimpleComparisonExpression;
 import com.fastsql.sql.command.result.Result;
+import com.fastsql.sql.command.result.impl.GoogleMySqlProcessorResult;
 import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import com.fastsql.sql.util.GoogleMySql;
@@ -16,6 +19,8 @@ import com.fastsql.sql.util.ResultSetUtil;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 public class SelectImpl implements Select, From, Join, Where{
+	
+	private static Logger log = Logger.getLogger(SelectImpl.class);
 	
 	private final StringBuilder builder;
 	private final ResultMode mode;
@@ -93,9 +98,9 @@ public class SelectImpl implements Select, From, Join, Where{
 	@Override
 	public <T> Result<T> build(T retorno, ResultMode mode) {
 		String sql = builder.toString();
-		System.out.println("Sql: "+sql);
-		System.out.println("Mode: "+mode);
-		System.out.println("Retorno: "+retorno);
+		log.info("Sql: "+sql);
+		log.info("Mode: "+mode);
+		log.info("Retorno: "+retorno);
 		return mode.getResult(sql, retorno);
 	}
 

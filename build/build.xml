@@ -27,16 +27,16 @@
 	</target>
 
 	<target name="compile" depends="init" description="compile the source ">
-		<javac srcdir="${src}" classpathref="build.path" destdir="${build}" encoding="ISO-8859-1" />
+		<javac verbose="false" srcdir="${src}" classpathref="build.path" destdir="${build}" encoding="ISO-8859-1"  source="1.6"  target="1.6"/>
 	</target>
 
-	<target name="compile-test" depends="compile" description="compile the source ">
-		<javac srcdir="${test}" classpathref="build.path.test" destdir="${dist}/test" encoding="ISO-8859-1" />
+	<target name="compile-test"  depends="compile" description="compile the source ">
+		<javac verbose="false" srcdir="${test}" classpathref="build.path.test" destdir="${dist}/test" encoding="ISO-8859-1" source="1.6" target="1.6"/>
 	</target>
 
-	<target name="dist" depends="test" description="generate the distribution">
+	<target name="dist" depends="compile-test" description="generate the distribution">
 		<mkdir dir="${dist}" />
-		<jar jarfile="${dist}/${jar.name}">
+		<jar jarfile="${dist}/${jar.name}" >
 			<fileset dir="${build}">
 				<include name="**/*.class" />
 				<exclude name="**/test/*.class" />
@@ -56,6 +56,7 @@
 		<delete dir="${dist}/test" />
 	</target>
 
+	<!--
 	<target name="test" depends="compile-test">
 		<junit printsummary="yes">
 			<formatter type="plain" />
@@ -74,4 +75,5 @@
 			</batchtest>
 		</junit>
 	</target>
+	-->
 </project>

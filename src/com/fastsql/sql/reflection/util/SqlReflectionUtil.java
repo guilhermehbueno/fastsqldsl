@@ -3,17 +3,38 @@ package com.fastsql.sql.reflection.util;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.fastsql.sql.builder.LogicalEnum;
 import com.fastsql.sql.command.expression.Expression;
 
 public class SqlReflectionUtil {
+	
+	private Logger log = Logger.getLogger(SqlReflectionUtil.class);
+	
+	public static void gerarIdParaEntidade(Object entidade){
+		Class clazz = entidade.getClass();
+		Field field = extractFieldWithAnnotation(clazz, Id.class);
+		String valorField;
+		try {
+			field.setAccessible(true);
+			valorField = (String) field.get(entidade);
+			if(valorField==null){
+				field.set(entidade, UUID.randomUUID().toString());
+			}
+			field.setAccessible(false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	
 	public static String extractAttributesFrom(Class modelo){
 		List<String> atributos = new ArrayList<String>();
@@ -37,6 +58,10 @@ public class SqlReflectionUtil {
 		for (Field field : campos) {
 			field.setAccessible(true);
 			Column col = field.getAnnotation(Column.class);
+			if(col==null){
+				continue;
+			}
+				
 			String value = getValorFormatado(field, entidade, logicalEnum);
 			if(value==null){
 				continue;
@@ -55,6 +80,9 @@ public class SqlReflectionUtil {
 		Object valor = campo.get(entidade);
 		Class tipoCampo = campo.getType();
 		Expression expr = null;
+		if(valor==null){
+			return null;
+		}
 		if(tipoCampo.isPrimitive()){
 			expr = Expression.likeInt(valor.toString());
 		}else{
@@ -112,5 +140,12 @@ public class SqlReflectionUtil {
 			field.setAccessible(false);
 		}
 		return campo;
+	}
+	
+	
+	public static void main(String[] args) {
+		for (int i = 0; i < 30; i++) {
+			System.out.println("'"+UUID.randomUUID().randomUUID()+"',");
+		}
 	}
 }

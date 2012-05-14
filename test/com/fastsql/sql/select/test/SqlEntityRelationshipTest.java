@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.fastsql.sql.builder.SqlTool;
-import com.fastsql.sql.builder.model.test.Menu;
+import com.fastsql.sql.builder.model.Menu;
 
 public class SqlEntityRelationshipTest {
 	

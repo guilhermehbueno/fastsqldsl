@@ -1,6 +1,6 @@
 package com.fastsql.sql.api;
 
-public interface Insert extends Build{
+public interface Insert extends BuildUpdate{
 	
 	Insert set(Build expression);
 	Insert on(Build expression);

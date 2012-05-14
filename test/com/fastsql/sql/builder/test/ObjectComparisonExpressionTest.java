@@ -1,6 +1,6 @@
 package com.fastsql.sql.builder.test;
 
-import com.fastsql.sql.builder.model.test.Usuario;
+import com.fastsql.sql.builder.model.Usuario;
 
 public class ObjectComparisonExpressionTest {
 	

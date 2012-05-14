@@ -1,16 +1,10 @@
 package com.fastsql.sql.command.insert;
 
-import java.util.List;
-
 import com.fastsql.sql.api.Build;
 import com.fastsql.sql.api.Insert;
 import com.fastsql.sql.builder.LogicalEnum;
-import com.fastsql.sql.command.result.Result;
-import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import com.fastsql.sql.util.GoogleMySql;
-import com.fastsql.sql.util.ResultSetUtil;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class InsertImpl implements Insert{
 	
@@ -22,31 +16,17 @@ public class InsertImpl implements Insert{
 	
 	public InsertImpl(Object entidade) throws Exception {
 		Class modelo = entidade.getClass();
+		SqlReflectionUtil.gerarIdParaEntidade(entidade);
 		String atributos = SqlReflectionUtil.extractAttributesWithValuesFrom(entidade, LogicalEnum.EQUALS);
-		atributos = atributos.replaceAll(",", " AND ");
+		//atributos = atributos.replaceAll(",", " AND ");
 		String nomeEntidade = SqlReflectionUtil.extractEntityName(modelo);
 		this.builder= new StringBuilder(" INSERT INTO "+nomeEntidade+" SET "+atributos);
 	}
 
 	@Override
-	public String build() {
-		return builder.toString();
-	}
-
-
-	@Override
-	public <T> Result<T> build(T retorno) {
+	public String toSql() {
 		String sql = builder.toString();
-		GoogleMySql google;
-		List<T> result = null;
-		try {
-			google = new GoogleMySql();
-			ResultSet resultSet = google.select(sql);
-			result = ResultSetUtil.extractEntityFrom(resultSet, retorno);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new Result<T>(result);
+		return sql;
 	}
 
 	@Override
@@ -68,9 +48,15 @@ public class InsertImpl implements Insert{
 	}
 
 	@Override
-	public <T> Result<T> build(T retorno, ResultMode mode) {
-		// TODO Auto-generated method stub
-		return null;
+	public void execute() {
+		String sql = builder.toString();
+		GoogleMySql google;
+		try {
+			System.out.println("UpdateImpl: "+sql);
+			google = new GoogleMySql();
+			google.insert(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }
