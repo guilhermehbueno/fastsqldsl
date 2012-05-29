@@ -46,7 +46,7 @@ public enum AssociationType {
 	
 	ONE_TO_ONE {
 		@Override
-		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws SQLException {
+		public Object extractFieldValue(Object modelo, Field field, ResultSet resultSet) throws Exception {
 			log.info("ONE_TO_ONE: ");
 			Object value = null;
 			field.setAccessible(true);
@@ -61,7 +61,7 @@ public enum AssociationType {
 				String sql = SqlTool.getInstance()
 										.select(field.getType())
 										.where(id(field.getType()).equals(value.toString()))
-										.build();
+										.toSql();
 				
 				log.info("SQL: "+sql);
 			}
@@ -84,7 +84,6 @@ public enum AssociationType {
 					return null;
 				}
 				
-				
 				String tipoParametrizado = null;
 				Type type = field.getGenericType();
 		        if (type instanceof ParameterizedType) {
@@ -99,13 +98,11 @@ public enum AssociationType {
 		        log.info("Construindo: "+tipoParametrizado);
 		        Object instanciaTipoParametrizado = Class.forName(tipoParametrizado).newInstance();
 				
-				
-				
 				List<? extends Object> result =  SqlTool.getInstance()
 																.select(" * ")
 																.from(join.table())
 																.where(attribute(join.referencedColumnName()).equals(value.toString()))
-																.build(instanciaTipoParametrizado).getResult();
+																.execute(instanciaTipoParametrizado).getResult();
 				value = result;
 				
 			}

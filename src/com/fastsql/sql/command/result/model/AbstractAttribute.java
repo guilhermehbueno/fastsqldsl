@@ -1,11 +1,10 @@
 package com.fastsql.sql.command.result.model;
 
 import java.lang.reflect.Field;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 
 import org.apache.log4j.Logger;
 
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class AbstractAttribute {
 	

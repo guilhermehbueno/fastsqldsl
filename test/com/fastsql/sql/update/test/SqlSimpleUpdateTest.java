@@ -17,9 +17,8 @@ public class SqlSimpleUpdateTest {
 	@Test
 	public void testSimpleUpdate() throws Exception {
 		Usuario user = new Usuario();
-		user.setId("teste");
+		user.setIdUsuario("teste");
 		user.setNome("guilherme");
-		user.setSobrenome("bueno");
 		String sql = SqlTool.update(user).toSql();
 		assertNotNull(sql);
 		System.out.println(sql);

@@ -8,7 +8,7 @@ import com.google.cloud.sql.jdbc.Connection;
 import com.google.cloud.sql.jdbc.PreparedStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
-public class GoogleMySql {
+public class GoogleMySql implements SqlCommands{
 	
 	private final Connection conn;
 	
@@ -30,19 +30,28 @@ public class GoogleMySql {
 		return resultSet;
 	}
 	
-	public void update(String update) throws Exception{
+	public boolean update(String update) throws Exception{
 		try{
 			 PreparedStatement stmt = conn.prepareStatement(update);
-			 stmt.execute();
+			 return stmt.execute();
 		}catch (Exception e) {
 			throw e;
 		}
 	}
 	
-	public void insert(String update) throws Exception{
+	public boolean delete(String delete) throws Exception{
+		try{
+			 PreparedStatement stmt = conn.prepareStatement(delete);
+			 return  stmt.execute();
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public boolean insert(String update) throws Exception{
 		try{
 			 PreparedStatement stmt = conn.prepareStatement(update);
-			 stmt.execute();
+			 return stmt.execute();
 		}catch (Exception e) {
 			throw e;
 		}

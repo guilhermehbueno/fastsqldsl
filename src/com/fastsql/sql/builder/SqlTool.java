@@ -5,6 +5,7 @@ import com.fastsql.sql.api.From;
 import com.fastsql.sql.api.Insert;
 import com.fastsql.sql.api.Select;
 import com.fastsql.sql.api.Update;
+import com.fastsql.sql.command.delete.DeleteImpl;
 import com.fastsql.sql.command.insert.InsertImpl;
 import com.fastsql.sql.command.result.mode.GoogleMySqlResultMode;
 import com.fastsql.sql.command.result.mode.ResultMode;
@@ -34,11 +35,11 @@ public class SqlTool {
 		return new SqlTool();
 	}
 	
-	public Select select(String atributo){
+	public Select select(String atributo) throws Exception{
 		return new SelectImpl(atributo,this.mode);
 	}
 	
-	public From select(Class modelo){
+	public From select(Class modelo) throws Exception{
 		return new SelectImpl(modelo, this.mode);
 	}
 	
@@ -46,12 +47,16 @@ public class SqlTool {
 		return new UpdateImpl(entidade);
 	}
 	
-	public static Delete delete(){
-		return null;
+	public Delete delete(String nomeEntidade){
+		return new DeleteImpl(nomeEntidade, this.mode);
 	}
 	
-	public static Insert insert(Object entidade) throws Exception{
-		return new InsertImpl(entidade);
+	public Delete delete(Object entidade) throws Exception{
+		return new DeleteImpl(entidade, this.mode);
+	}
+	
+	public Insert insert(Object entidade) throws Exception{
+		return new InsertImpl(entidade, this.mode);
 	}
 
 }

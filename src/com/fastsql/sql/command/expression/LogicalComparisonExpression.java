@@ -1,24 +1,28 @@
 package com.fastsql.sql.command.expression;
 
-import com.fastsql.sql.api.Build;
+import static com.fastsql.sql.command.expression.Expression.likeString;
+
+import com.fastsql.sql.api.BuildExpression;
 import com.fastsql.sql.builder.LogicalEnum;
 import com.fastsql.sql.command.result.Result;
 import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 
-import static com.fastsql.sql.command.expression.Expression.*;
-
-public class LogicalComparisonExpression implements Build {
+public class LogicalComparisonExpression implements BuildExpression {
 	
 	private final StringBuilder builder;
 
-	private LogicalComparisonExpression(String atributo) {
+	LogicalComparisonExpression(String atributo) {
 		super();
 		this.builder = new StringBuilder(atributo);
 	}
 	
 	public static LogicalComparisonExpression attribute(String atributo){
 		return new LogicalComparisonExpression(atributo);
+	}
+	
+	public static LogicalComparisonExpression id(){
+		return null;
 	}
 	
 	public static LogicalComparisonExpression id(Class modelo){

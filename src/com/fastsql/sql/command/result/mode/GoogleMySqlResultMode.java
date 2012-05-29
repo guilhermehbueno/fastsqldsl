@@ -34,7 +34,6 @@ public class GoogleMySqlResultMode  implements ResultMode{
 		this.processorResult.addStepResult(new ExtractOneToOneStep());
 	}
 	
-
 	@Override
 	public <T> Result<T> getResult(String sql, T retorno){
 		ResultSet resultSet;
@@ -54,4 +53,24 @@ public class GoogleMySqlResultMode  implements ResultMode{
 		return result;
 	}
 
+	@Override
+	public ResultSet select(String select) throws Exception {
+		return google.select(select);
+	}
+
+	@Override
+	public boolean update(String update) throws Exception {
+		return google.update(update);
+	}
+
+	@Override
+	public boolean delete(String delete) throws Exception {
+		return this.google.delete(delete);
+	}
+
+
+	@Override
+	public boolean insert(String insert) throws Exception {
+		return this.google.insert(insert);
+	}
 }

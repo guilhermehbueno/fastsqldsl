@@ -1,6 +1,7 @@
 package com.fastsql.sql.command.update;
 
 import com.fastsql.sql.api.Build;
+import com.fastsql.sql.api.BuildExpression;
 import com.fastsql.sql.api.BuildUpdate;
 import com.fastsql.sql.api.From;
 import com.fastsql.sql.api.FromUpdate;
@@ -64,7 +65,7 @@ public class UpdateImpl  implements Update, FromUpdate{
 	}
 
 	@Override
-	public BuildUpdate where(Build expression) {
+	public BuildUpdate where(BuildExpression expression) {
 		builder.append(" WHERE ").append(expression.build());
 		return this;
 	}

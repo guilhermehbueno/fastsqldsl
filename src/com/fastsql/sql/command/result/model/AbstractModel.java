@@ -1,11 +1,11 @@
 package com.fastsql.sql.command.result.model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class AbstractModel{
 	private final String modelName;

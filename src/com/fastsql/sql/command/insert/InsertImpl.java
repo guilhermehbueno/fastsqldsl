@@ -3,18 +3,22 @@ package com.fastsql.sql.command.insert;
 import com.fastsql.sql.api.Build;
 import com.fastsql.sql.api.Insert;
 import com.fastsql.sql.builder.LogicalEnum;
+import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import com.fastsql.sql.util.GoogleMySql;
 
 public class InsertImpl implements Insert{
 	
 	private final StringBuilder builder;
+	private final ResultMode mode;
 	
-	public InsertImpl(String nomeEntidade) {
+	public InsertImpl(String nomeEntidade, ResultMode mode) {
+		this.mode = mode;
 		this.builder= new StringBuilder(" INSERT INTO "+nomeEntidade);
 	}
 	
-	public InsertImpl(Object entidade) throws Exception {
+	public InsertImpl(Object entidade, ResultMode mode) throws Exception {
+		this.mode = mode;
 		Class modelo = entidade.getClass();
 		SqlReflectionUtil.gerarIdParaEntidade(entidade);
 		String atributos = SqlReflectionUtil.extractAttributesWithValuesFrom(entidade, LogicalEnum.EQUALS);
@@ -50,11 +54,9 @@ public class InsertImpl implements Insert{
 	@Override
 	public void execute() {
 		String sql = builder.toString();
-		GoogleMySql google;
 		try {
-			System.out.println("UpdateImpl: "+sql);
-			google = new GoogleMySql();
-			google.insert(sql);
+			System.out.println("InsertImpl: "+sql);
+			this.mode.insert(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

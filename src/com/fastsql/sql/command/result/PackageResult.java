@@ -1,9 +1,9 @@
 package com.fastsql.sql.command.result;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class PackageResult <T>{
 	

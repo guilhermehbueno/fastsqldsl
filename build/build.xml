@@ -34,7 +34,7 @@
 		<javac verbose="false" srcdir="${test}" classpathref="build.path.test" destdir="${dist}/test" encoding="ISO-8859-1" source="1.6" target="1.6"/>
 	</target>
 
-	<target name="dist" depends="compile-test" description="generate the distribution">
+	<target name="dist" depends="test" description="generate the distribution">
 		<mkdir dir="${dist}" />
 		<jar jarfile="${dist}/${jar.name}" >
 			<fileset dir="${build}">
@@ -56,10 +56,10 @@
 		<delete dir="${dist}/test" />
 	</target>
 
-	<!--
+	
 	<target name="test" depends="compile-test">
-		<junit printsummary="yes">
-			<formatter type="plain" />
+		<junit printsummary="yes" >
+			<formatter type="xml" />
 			<classpath>
 				<pathelement location="${build.path.test}" />
 				<pathelement location="${dist}/test" />
@@ -75,5 +75,5 @@
 			</batchtest>
 		</junit>
 	</target>
-	-->
+	
 </project>

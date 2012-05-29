@@ -15,9 +15,8 @@ public class SqlReflectionUtilTest {
 	@Test
 	public void testExtractAttributesFrom() {
 		Usuario user = new Usuario();
-		user.setId("teste");
+		user.setIdUsuario("teste");
 		user.setNome("guilherme");
-		user.setSobrenome("bueno");
 		String result = SqlReflectionUtil.extractAttributesFrom(user.getClass());
 		assertNotNull(result);
 		System.out.println("[1] - testExtractAttributesFrom = "+result);
@@ -26,9 +25,8 @@ public class SqlReflectionUtilTest {
 	@Test
 	public void testExtractAttributesWithValuesFrom() throws Exception {
 		Usuario user = new Usuario();
-		user.setId("teste");
+		user.setIdUsuario("teste");
 		user.setNome("guilherme");
-		user.setSobrenome("bueno");
 		String result = SqlReflectionUtil.extractAttributesWithValuesFrom(user, LogicalEnum.EQUALS);
 		assertNotNull(result);
 		System.out.println("[2] - testExtractAttributesWithValuesFrom = "+result);
@@ -37,9 +35,8 @@ public class SqlReflectionUtilTest {
 	@Test
 	public void testExtractEntityName() {
 		Usuario user = new Usuario();
-		user.setId("teste");
+		user.setIdUsuario("teste");
 		user.setNome("guilherme");
-		user.setSobrenome("bueno");
 		String result = SqlReflectionUtil.extractEntityName(user.getClass());
 		assertNotNull(result);
 		System.out.println("[3] - testExtractEntityName = "+result);
@@ -48,9 +45,8 @@ public class SqlReflectionUtilTest {
 	@Test
 	public void testExtractListAttributesFrom() {
 		Usuario user = new Usuario();
-		user.setId("teste");
+		user.setIdUsuario("teste");
 		user.setNome("guilherme");
-		user.setSobrenome("bueno");
 		List<String> result = SqlReflectionUtil.extractListAttributesFrom(user.getClass());
 		assertNotNull(result);
 		assertTrue(result.size()>0);

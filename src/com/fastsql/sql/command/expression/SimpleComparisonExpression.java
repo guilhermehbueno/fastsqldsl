@@ -3,11 +3,12 @@ package com.fastsql.sql.command.expression;
 import java.util.List;
 
 import com.fastsql.sql.api.Build;
+import com.fastsql.sql.api.BuildExpression;
 import com.fastsql.sql.command.result.Result;
 import com.fastsql.sql.command.result.mode.ResultMode;
 
 
-public class SimpleComparisonExpression implements Build{
+public class SimpleComparisonExpression implements BuildExpression{
 	
 	private final StringBuilder builder;
 	private final String AND = " AND ";
@@ -60,6 +61,7 @@ public class SimpleComparisonExpression implements Build{
 
 	@Override
 	public <T> Result<T> build(T retorno) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -68,6 +70,5 @@ public class SimpleComparisonExpression implements Build{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

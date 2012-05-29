@@ -1,22 +1,16 @@
 package com.fastsql.sql.command.select;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import com.fastsql.sql.api.Build;
+import com.fastsql.sql.api.BuildExpression;
 import com.fastsql.sql.api.From;
 import com.fastsql.sql.api.Join;
 import com.fastsql.sql.api.Select;
 import com.fastsql.sql.api.Where;
-import com.fastsql.sql.command.expression.SimpleComparisonExpression;
 import com.fastsql.sql.command.result.Result;
-import com.fastsql.sql.command.result.impl.GoogleMySqlProcessorResult;
 import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
-import com.fastsql.sql.util.GoogleMySql;
-import com.fastsql.sql.util.ResultSetUtil;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class SelectImpl implements Select, From, Join, Where{
 	
@@ -25,12 +19,15 @@ public class SelectImpl implements Select, From, Join, Where{
 	private final StringBuilder builder;
 	private final ResultMode mode;
 	
-	public SelectImpl(String atributo, ResultMode modeParam) {
+	@SuppressWarnings("unchecked")
+	public SelectImpl(String atributo, ResultMode modeParam) throws Exception {
+		//this.retorno =  ReflectionUtil.getObjetoDoTipoParametrizadoByClass(this.getClass());
 		this.builder= new StringBuilder(" SELECT "+atributo);
 		this.mode = modeParam;
 	}
 	
-	public SelectImpl(Class modelo, ResultMode modeParam) {
+	public SelectImpl(Class modelo, ResultMode modeParam) throws Exception {
+		//this.retorno =  ReflectionUtil.getObjetoDoTipoParametrizadoByClass(this.getClass());
 		String atributos = SqlReflectionUtil.extractAttributesFrom(modelo);
 		String nomeEntidade = SqlReflectionUtil.extractEntityName(modelo);
 		this.builder= new StringBuilder(" SELECT "+atributos+" FROM "+nomeEntidade);
@@ -38,12 +35,12 @@ public class SelectImpl implements Select, From, Join, Where{
 	}
 
 	@Override
-	public String build() {
+	public String toSql() {
 		return builder.toString();
 	}
 
 	@Override
-	public Build where(Build expression) {
+	public Build where(BuildExpression expression) {
 		builder.append(" WHERE ").append(expression.build());
 		return this;
 	}
@@ -73,35 +70,24 @@ public class SelectImpl implements Select, From, Join, Where{
 	}
 
 	@Override
-	public From on(Build expression) {
+	public From on(BuildExpression expression) {
 		this.builder.append(" ON "+expression.build());
 		return this;
 	}
 
 	@Override
-	public <T> Result<T> build(T retorno) {
-		/*String sql = builder.toString();
-		GoogleMySql google;
-		List<T> result = null;
-		try {
-			google = new GoogleMySql();
-			ResultSet resultSet = google.select(sql);
-			result = ResultSetUtil.extractEntityFrom(resultSet, retorno);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new Result<T>(result);*/
-		return build(retorno, this.mode);
+	public <T> Result<T> execute(T retorno) {
+		return  execute(this.mode, retorno);
 		
 	}
 
 	@Override
-	public <T> Result<T> build(T retorno, ResultMode mode) {
+	public <T> Result<T> execute(ResultMode mode, T retorno) {
 		String sql = builder.toString();
 		log.info("Sql: "+sql);
 		log.info("Mode: "+mode);
 		log.info("Retorno: "+retorno);
-		return mode.getResult(sql, retorno);
+		return (Result<T>) mode.getResult(sql, retorno);
 	}
 
 }

@@ -1,13 +1,12 @@
 package com.fastsql.sql.util;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.fastsql.sql.command.result.model.AbstractModel;
-import com.fastsql.sql.command.result.model.AssociationType;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class ResultSetUtil {
 	
