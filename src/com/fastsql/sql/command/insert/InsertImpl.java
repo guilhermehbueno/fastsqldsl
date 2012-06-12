@@ -11,6 +11,7 @@ public class InsertImpl implements Insert{
 	
 	private final StringBuilder builder;
 	private final ResultMode mode;
+	private Object entidade;
 	
 	public InsertImpl(String nomeEntidade, ResultMode mode) {
 		this.mode = mode;
@@ -19,10 +20,10 @@ public class InsertImpl implements Insert{
 	
 	public InsertImpl(Object entidade, ResultMode mode) throws Exception {
 		this.mode = mode;
+		this.entidade = entidade;
 		Class modelo = entidade.getClass();
 		SqlReflectionUtil.gerarIdParaEntidade(entidade);
 		String atributos = SqlReflectionUtil.extractAttributesWithValuesFrom(entidade, LogicalEnum.EQUALS);
-		//atributos = atributos.replaceAll(",", " AND ");
 		String nomeEntidade = SqlReflectionUtil.extractEntityName(modelo);
 		this.builder= new StringBuilder(" INSERT INTO "+nomeEntidade+" SET "+atributos);
 	}
@@ -52,13 +53,15 @@ public class InsertImpl implements Insert{
 	}
 
 	@Override
-	public void execute() {
+	public Object execute() {
 		String sql = builder.toString();
 		try {
 			System.out.println("InsertImpl: "+sql);
 			this.mode.insert(sql);
+			return entidade;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

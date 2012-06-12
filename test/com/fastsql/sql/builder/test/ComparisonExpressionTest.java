@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.fastsql.sql.builder.SqlTerms;
-import com.fastsql.sql.command.expression.SimpleComparisonExpression;
+import com.fastsql.sql.expression.SimpleComparisonExpression;
 
 public class ComparisonExpressionTest {
 

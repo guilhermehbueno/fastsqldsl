@@ -1,6 +1,6 @@
 package com.fastsql.sql.builder;
 
-import com.fastsql.sql.command.expression.Expression;
+import com.fastsql.sql.expression.Expression;
 
 public enum LogicalEnum {
 	

@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 import static com.fastsql.sql.builder.SqlTerms.*;
 import org.junit.Test;
 import com.fastsql.sql.builder.SqlTool;
-import static com.fastsql.sql.command.expression.LogicalComparisonExpression.attribute;
+
+import static com.fastsql.sql.expression.LogicalComparisonExpression.attribute;
 
 public class SqlSimpleSelectSqlTest {
 

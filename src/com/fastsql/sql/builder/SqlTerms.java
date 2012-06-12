@@ -1,8 +1,8 @@
 package com.fastsql.sql.builder;
 
-import com.fastsql.sql.command.expression.Expression;
-import com.fastsql.sql.command.expression.LogicalComparisonExpression;
-import com.fastsql.sql.command.expression.SimpleComparisonExpression;
+import com.fastsql.sql.expression.Expression;
+import com.fastsql.sql.expression.LogicalComparisonExpression;
+import com.fastsql.sql.expression.SimpleComparisonExpression;
 
 public class SqlTerms {
 	

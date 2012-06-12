@@ -1,6 +1,6 @@
 package com.fastsql.sql.select.test;
 
-import static com.fastsql.sql.command.expression.LogicalComparisonExpression.id;
+import static com.fastsql.sql.expression.LogicalComparisonExpression.id;
 
 import org.junit.Assert;
 import org.junit.Test;

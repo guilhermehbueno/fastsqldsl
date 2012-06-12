@@ -16,11 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fastsql.sql.builder.SqlTool;
-import com.fastsql.sql.command.expression.Expression;
+import com.fastsql.sql.expression.Expression;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import org.apache.log4j.Logger;
 
-import static com.fastsql.sql.command.expression.LogicalComparisonExpression.*;
+import static com.fastsql.sql.expression.LogicalComparisonExpression.*;
 
 /**
  * This enum is responsible for recovery values from different associations types.
@@ -58,12 +58,13 @@ public enum AssociationType {
 				}
 				
 				
-				String sql = SqlTool.getInstance()
+				 Object result = SqlTool.getInstance()
 										.select(field.getType())
 										.where(id(field.getType()).equals(value.toString()))
-										.toSql();
+										.execute(field.getType().newInstance()).getUniqueResult();
 				
-				log.info("SQL: "+sql);
+				log.info("Result: "+result);
+				value = result;
 			}
 			field.setAccessible(false);
 			return value;

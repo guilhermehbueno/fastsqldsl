@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.fastsql.sql.builder.LogicalEnum;
-import com.fastsql.sql.command.expression.Expression;
+import com.fastsql.sql.expression.Expression;
 
 public class SqlReflectionUtil {
 	

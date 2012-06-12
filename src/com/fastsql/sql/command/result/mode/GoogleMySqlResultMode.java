@@ -1,5 +1,7 @@
 package com.fastsql.sql.command.result.mode;
 
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
 import com.fastsql.sql.command.result.PackageResult;
@@ -32,6 +34,11 @@ public class GoogleMySqlResultMode  implements ResultMode{
 		this.processorResult.addStepResult(new ExtractManyToOneStep());
 		this.processorResult.addStepResult(new ExtractOneToManyStep());
 		this.processorResult.addStepResult(new ExtractOneToOneStep());
+		try {
+		this.google = new GoogleMySql();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -39,7 +46,6 @@ public class GoogleMySqlResultMode  implements ResultMode{
 		ResultSet resultSet;
 		Result<T> result = null;
 		try {
-			this.google = new GoogleMySql();
 			log.info("Instanciando GoogleMySql: "+sql);
 			System.out.println("Instanciando GoogleMySql: "+sql);
 			resultSet = this.google.select(sql);

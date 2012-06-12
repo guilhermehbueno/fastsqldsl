@@ -35,9 +35,11 @@ public class AbstractAttribute {
 		log.info(this.getClass().getSimpleName()+" Executando setToObject com o field: "+this.field.getName()+": "+this.value);
 		boolean hasField = hasField(modelo, this.field);
 		if(hasField){
+			if(!this.field.getName().equalsIgnoreCase("serialVersionUID")){
 			this.field.setAccessible(true);
 			this.field.set(modelo, this.value);
 			this.field.setAccessible(false);
+			}
 		}
 	}
 	

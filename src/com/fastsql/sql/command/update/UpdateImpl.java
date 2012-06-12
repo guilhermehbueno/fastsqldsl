@@ -8,17 +8,23 @@ import com.fastsql.sql.api.FromUpdate;
 import com.fastsql.sql.api.Insert;
 import com.fastsql.sql.api.Update;
 import com.fastsql.sql.builder.LogicalEnum;
+import com.fastsql.sql.command.result.mode.ResultMode;
 import com.fastsql.sql.reflection.util.SqlReflectionUtil;
 import com.fastsql.sql.util.GoogleMySql;
 
 public class UpdateImpl  implements Update, FromUpdate{
 	private final StringBuilder builder;
+	private Object entidade;
+	private final ResultMode mode;
 	
-	public UpdateImpl(String nomeEntidade) {
+	public UpdateImpl(String nomeEntidade, ResultMode mode) {
+		this.mode = mode;
 		this.builder= new StringBuilder(" UPDATE "+nomeEntidade);
 	}
 	
-	public UpdateImpl(Object entidade) throws Exception {
+	public UpdateImpl(Object entidade, ResultMode mode) throws Exception {
+		this.mode = mode;
+		this.entidade = entidade;
 		Class modelo = entidade.getClass();
 		String atributos = SqlReflectionUtil.extractAttributesWithValuesFrom(entidade, LogicalEnum.EQUALS);
 		//atributos = atributos.replaceAll(",", " AND ");
@@ -29,14 +35,14 @@ public class UpdateImpl  implements Update, FromUpdate{
 
 
 	@Override
-	public void execute() {
-		GoogleMySql google;
+	public Object execute() {
 		try {
-			google = new GoogleMySql();
-			google.update(toSql());
+			mode.update(toSql());
+			return this.entidade;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	@Override

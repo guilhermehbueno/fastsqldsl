@@ -43,8 +43,8 @@ public class SqlTool {
 		return new SelectImpl(modelo, this.mode);
 	}
 	
-	public static Update update(Object entidade) throws Exception{
-		return new UpdateImpl(entidade);
+	public Update update(Object entidade) throws Exception{
+		return new UpdateImpl(entidade, this.mode);
 	}
 	
 	public Delete delete(String nomeEntidade){
