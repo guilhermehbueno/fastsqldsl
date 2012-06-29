@@ -1,0 +1,34 @@
+#surefire
+#Fri Jun 29 19:55:35 BRT 2012
+testClassesDirectory=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\test-classes
+classPathUrl.4=C\:\\Users\\Guilherme\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.20\\mysql-connector-java-5.1.20.jar
+classPathUrl.3=C\:\\Users\\Guilherme\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar
+classPathUrl.2=C\:\\Users\\Guilherme\\.m2\\repository\\junit\\junit\\4.1\\junit-4.1.jar
+useManifestOnlyJar=true
+classPathUrl.1=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\classes
+reportsDirectory=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\surefire-reports
+classPathUrl.0=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\test-classes
+dirscanner.0=directoryScannerOptions
+providerConfiguration=org.apache.maven.surefire.junit4.JUnit4Provider
+testSuiteDefinitionTestSourceDirectory=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\src\\test\\java
+surefireClassPathUrl.1=C\:\\Users\\Guilherme\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\2.7.1\\surefire-api-2.7.1.jar
+surefireClassPathUrl.0=C\:\\Users\\Guilherme\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-junit4\\2.7.1\\surefire-junit4-2.7.1.jar
+report.2=org.apache.maven.surefire.report.XMLReporter
+useSystemClassLoader=true
+report.1=org.apache.maven.surefire.report.BriefFileReporter
+report.0=org.apache.maven.surefire.report.ForkingConsoleReporter
+excludes0=**/*$*
+isTrimStackTrace=true
+dirscanner.0.params=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\test-classes|[**/Test*.java, **/*Test.java, **/*TestCase.java]|[**/*$*]
+includes2=**/*TestCase.java
+enableAssertions=true
+includes1=**/*Test.java
+failIfNoTests=false
+includes0=**/Test*.java
+dirscanner.0.types=java.io.File|java.util.ArrayList|java.util.ArrayList
+classPathUrl.9=C\:\\Users\\Guilherme\\.m2\\repository\\org\\hsqldb\\sqltool\\2.2.8\\sqltool-2.2.8.jar
+classPathUrl.8=C\:\\Users\\Guilherme\\.m2\\repository\\org\\hibernate\\javax\\persistence\\hibernate-jpa-2.0-api\\1.0.1.Final\\hibernate-jpa-2.0-api-1.0.1.Final.jar
+classPathUrl.7=C\:\\Users\\Guilherme\\.m2\\repository\\com\\google\\appengine\\appengine-api-1.0-sdk\\1.7.0\\appengine-api-1.0-sdk-1.7.0.jar
+childDelegation=false
+classPathUrl.6=C\:\\Users\\Guilherme\\.m2\\repository\\hsqldb\\hsqldb\\1.8.0.10\\hsqldb-1.8.0.10.jar
+classPathUrl.5=C\:\\Users\\Guilherme\\.m2\\repository\\log4j\\log4j\\1.2.17\\log4j-1.2.17.jar
