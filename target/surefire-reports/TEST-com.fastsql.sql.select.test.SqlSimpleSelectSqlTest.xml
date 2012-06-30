@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.292" errors="0" skipped="0" tests="5" name="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest">
+<testsuite failures="0" time="0.463" errors="0" skipped="0" tests="5" name="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_22\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="H:\GUILHERME\PROJETOS\MY_GIT\fastsqldsl"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="H:\GUILHERME\PROJETOS\MY_GIT\fastsqldsl\target\surefire\surefirebooter7767503619922318555.jar"/>
+    <property name="surefire.real.class.path" value="H:\GUILHERME\PROJETOS\MY_GIT\fastsqldsl\target\surefire\surefirebooter7975918481942904466.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\GUILHE~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -59,9 +59,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.065" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelect"/>
-  <testcase time="0.071" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithWhere"/>
-  <testcase time="0.037" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithInnerJoin"/>
-  <testcase time="0.073" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithLeftOuterJoin"/>
-  <testcase time="0.035" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithRightOuterJoin"/>
+  <testcase time="0.202" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelect"/>
+  <testcase time="0.05" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithWhere"/>
+  <testcase time="0.041" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithInnerJoin"/>
+  <testcase time="0.105" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithLeftOuterJoin"/>
+  <testcase time="0.057" classname="com.fastsql.sql.select.test.SqlSimpleSelectSqlTest" name="testSelectWithRightOuterJoin"/>
 </testsuite>

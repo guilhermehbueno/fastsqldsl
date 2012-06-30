@@ -1,5 +1,5 @@
 #surefire
-#Fri Jun 29 19:55:35 BRT 2012
+#Sat Jun 30 13:22:41 BRT 2012
 testClassesDirectory=H\:\\GUILHERME\\PROJETOS\\MY_GIT\\fastsqldsl\\target\\test-classes
 classPathUrl.4=C\:\\Users\\Guilherme\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.20\\mysql-connector-java-5.1.20.jar
 classPathUrl.3=C\:\\Users\\Guilherme\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar
