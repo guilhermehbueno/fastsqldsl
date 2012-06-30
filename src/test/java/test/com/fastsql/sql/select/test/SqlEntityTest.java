@@ -17,7 +17,6 @@ public class SqlEntityTest {
 		From from =  SqlTool.getInstance(resulMode).select(Menu.class);
 		Assert.assertNotNull(from);
 		String sql =from.toSql();
-		Assert.assertNotNull(null);
 		Assert.assertNotNull(sql);
 		System.out.println(sql);
 	}
